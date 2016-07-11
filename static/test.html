@@ -1,0 +1,89 @@
+<html>
+<head>
+<script>
+	var renderArticle = function(HTML) {
+		var div = document.createElement('div');
+		div.setAttribute('id', 'temp_article');
+		div.innerHTML = HTML;
+		document.getElementById('ARTICLE_WRAPPER').appendChild(div);
+		var temp_article = document.getElementById('temp_article');
+		var height = temp_article.clientHeight;
+		var width = temp_article.clientWidth;
+
+		var data = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\""+width+"\" height=\""+height+"\" ><foreignObject width=\""+width+"\" height=\""+height+"\"><div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"font-size:12px\"><body>"+temp_article.innerHTML+"</body></div></foreignObject></svg>";
+		console.log(data);
+		DOMURL = window.URL || window.webkitURL || window;
+		var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+
+		blobToCanvas(svgBlob, width, height);
+		// 
+		// console.log(img, svg, url);
+
+		// img.src = url;
+	}
+
+	var blobToCanvas = function(slicedBlob, width, height) {
+		var wrapper = document.getElementById("CANVAS_WRAPPER");
+		var canvas = document.createElement("canvas");
+		var ctx = canvas.getContext('2d');
+		canvas.height = height;
+		canvas.width = width;
+
+		wrapper.appendChild(canvas);
+		
+		var url = DOMURL.createObjectURL(slicedBlob);
+		var img = new Image(width, height);
+
+		img.onload = function() {
+			ctx.drawImage(img, 0, 0);
+			DOMURL.revokeObjectURL(url);
+		}
+
+		img.src = url;
+		
+		console.log(slicedBlob, url)
+		
+	}
+
+	var consolidateCanvases = function(canvases) {
+
+	}
+
+	var convertImgToDataUrl = function(elementId, callback) {
+		var imgs = document.getElementById(elementId).getElementsByTagName("img");
+		var returnUrls = [];
+
+		for (var i = 0; i<imgs.length; i++) {
+			var tempImage = new Image();
+		    tempImage.crossOrigin = 'Anonymous';
+
+		    tempImage.onload = function(){
+		        var canvas = document.createElement('CANVAS');
+		        var ctx = canvas.getContext('2d');
+		        canvas.height = this.height;
+		        canvas.width = this.width;
+		        ctx.drawImage(this, 0, 0);
+		        var dataURL = canvas.toDataURL("image/png");
+		        returnUrls.push(dataURL);
+		        canvas = null; 
+		        if (i == imgs.length-1) {
+		        	for (var x = 0; x<imgs.length; x++) {
+		        		imgs[x].src = returnUrls[i];
+		        	};
+		        	callback(document.getElementById(elementId));
+		        };
+		    };
+
+		    tempImage.src = imgs[i].src;
+		}
+	}
+</script>
+</head>
+<body>
+	AMIP
+	<div id="CANVAS_WRAPPER">
+	</div>
+	<div id="ARTICLE_WRAPPER">
+	</div>
+</body>
+</html>
