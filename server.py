@@ -269,7 +269,7 @@ def maip():
         display.stop()
 
         # subprocess.call("mv "+ID+".png static/"+ID+".png", shell=True)
-    except Exception as w:
+    except Exception as e:
         print e
     return redirect(url_for("renderPic", picture_id=ID))
 
