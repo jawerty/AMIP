@@ -206,7 +206,7 @@ def maip():
 
     document = Document(html)
     readable_article = "<div id='BODY'>"+document.summary()+"</div>"
-    readable_title = "<p id='TITLE-LABEL'>*generated with AMIP</p><h1 id='TITLE'>"+logo++document.short_title()+"</h1>"
+    readable_title = "<p id='TITLE-LABEL'>*generated with AMIP</p><h1 id='TITLE'>"+logo+document.short_title()+"</h1>"
     readable_author = "<hr><p>By AUTHOR</p><hr>"
     formatted_article = style+"<div id='BIG_CONTENT'>"+readable_title+readable_article+"</div>"
     display.start()
