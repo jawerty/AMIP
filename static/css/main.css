@@ -24,7 +24,7 @@ input[type="text"] {
 	border-radius: 3px;
 	padding: 10px;
 	border: 1px solid #aaa;
-	margin: 0 auto;
+	margin: 10px auto;
 	display: block;
 	outline: none;
 }
@@ -39,7 +39,7 @@ input[type="submit"] {
 	padding: 10px 20px;
 	border: 1px solid #ccc;
 	margin: 0 auto;
-	margin-top: 40px;
+	margin-top: 30px;
 	display: block;
 	cursor: pointer;
 }
