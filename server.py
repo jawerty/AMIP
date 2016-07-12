@@ -42,7 +42,7 @@ def sendAMIPEmail(receivers, subject, body, image_id):
 
         mail.starttls()
 
-        console.log(os.environ["GPWD"])
+        print os.environ["GPWD"]
         mail.login('"jawerty210@gmail.com"', os.environ["GPWD"])
         mail.sendmail("jawerty210@gmail.com", receivers, msg.as_string())
         mail.quit()
