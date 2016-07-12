@@ -26,7 +26,6 @@ input[type="text"] {
 	border: 1px solid #aaa;
 	margin: 0 auto;
 	display: block;
-	margin-bottom: 40px;
 	outline: none;
 }
 
@@ -40,6 +39,7 @@ input[type="submit"] {
 	padding: 10px 20px;
 	border: 1px solid #ccc;
 	margin: 0 auto;
+	margin-top: 40px;
 	display: block;
 	cursor: pointer;
 }
