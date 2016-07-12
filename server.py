@@ -25,7 +25,7 @@ app = Flask(__name__, static_url_path='/static/')
 
 def sendAMIPEmail(receivers, subject, body, image_id):
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
+    msg['Subject'] = re.sub('<[^<]+?>', '', subject)
     msg['From'] = "jawerty210@gmail.com"
     msg['To'] = receivers
 
@@ -267,10 +267,10 @@ def maip():
 
     print driver.get_log('browser')
     driver.quit()
-    display.stop()  
+    display.stop()
 
     if email and len(email) > 0:
-        sendAMIPEmail(email, "[NYT] "+readable_title, "Visit article at "+article_link, ID)
+        sendAMIPEmail(email, "[NYT] "+document.short_title(), "Visit article at "+article_link, ID)
 
     # subprocess.call("mv "+ID+".png static/"+ID+".png", shell=True)
     return redirect(url_for("renderPic", picture_id=ID))
