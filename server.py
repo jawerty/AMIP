@@ -24,7 +24,6 @@ cwd = os.getcwd()
 app = Flask(__name__, static_url_path='/static/')
 
 def sendAMIPEmail(receivers, subject, body, image_id):
-    receivers = [x.strip() for x in receivers.split(',')]
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
     msg['From'] = "jawerty210@gmail.com"
@@ -44,7 +43,7 @@ def sendAMIPEmail(receivers, subject, body, image_id):
 
         print os.environ["GPWD"]
         mail.login("amip.reporter@gmail.com", os.environ["GPWD"])
-        mail.sendmail("jawerty210@gmail.com", receivers, msg.as_string())
+        mail.sendmail("amip.reporter@gmail.com", receivers, msg.as_string())
         mail.quit()
 
         return True
